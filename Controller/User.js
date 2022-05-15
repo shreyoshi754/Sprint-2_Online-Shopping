@@ -1,9 +1,9 @@
-const User = require('../Models/User');
 const bcrypt = require('bcrypt');
-
+const prisma = require('../Db/index')
+const jwt = require('jsonwebtoken');
 exports.postSignup = async (req, res, next) => {
   
-    let {username, password, email, bio} = req.body;
+    let {name, password, email} = req.body;
 
     const saltOrRounds = 10;
     password = await bcrypt.hash(password, saltOrRounds);
@@ -11,8 +11,10 @@ exports.postSignup = async (req, res, next) => {
    
     try {
         console.log("Hello")
-        const user = new User({username,password, email, bio});
-        const result = await user.createUser();
+       
+        const user = await prisma.user.create({
+            data:{name,email,password}
+        });
         res.send(user);
     } catch (error) {
         const errorToThrow = new Error();
@@ -28,3 +30,42 @@ exports.postSignup = async (req, res, next) => {
         next(errorToThrow);
     }
 };
+
+exports.postLogin = async (req, res, next) => {
+    let {email, password} = req.body;
+    
+    process.env.SECRET_KEY
+     try{
+
+        const existingUser = await prisma.user.findUnique({
+			where: {
+				email,
+			},
+		});
+
+        if(!existingUser){
+            res.send("No user found");
+        }
+
+        var passwordMatch = await bcrypt.compare(password, existingUser.password);
+        if(!passwordMatch){
+            res.send("Password didn't Match")
+        }
+
+        const obj={
+            unique: existingUser.id
+        }
+
+        const token=jwt.sign(obj, process.env.SECRET_KEY)
+        res.send(token)
+
+     }catch(err){
+        console.log(err)
+     }
+
+
+}
+
+exports.getDetails = async(req,res)=>{
+    return res.send(req.user);
+}
