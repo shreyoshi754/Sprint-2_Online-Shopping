@@ -3,7 +3,7 @@ exports.addProduct=async(req, res, next) => {
   const { name, price, catagory } = req.body;
   console.log(req.user);
   try {
-    if(req.user.role==='seller'||'admin'){
+    if(req.user.role==='seller'){
     const product = await prisma.product.create({
         data:{name,price,catagory}
     });
@@ -38,16 +38,22 @@ catch(err){
   console.log(err)
 }
 };
+
+
 exports.deleteProduct = async (req, res, next) => {
-  let {name, price, catagory} = req.body;
    try{
-      var id= req.params.id
+    if(req.user.role==='seller'){
+      var id= parseInt(req.params.id);
       const deleted = await prisma.product.delete({
       where: {
         id: id,
       },
     })
   res.send(deleted);
+    }
+    else{
+      return res.send('You are not a seller')
+    }
 }
 catch(err){
   console.log(err)
