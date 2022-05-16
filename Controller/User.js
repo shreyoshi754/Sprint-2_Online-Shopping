@@ -3,7 +3,7 @@ const prisma = require('../Db/index')
 const jwt = require('jsonwebtoken');
 exports.postSignup = async (req, res, next) => {
   
-    let {name, password, email} = req.body;
+    let {name, password, email,role} = req.body;
 
     const saltOrRounds = 10;
     password = await bcrypt.hash(password, saltOrRounds);
@@ -13,7 +13,7 @@ exports.postSignup = async (req, res, next) => {
         console.log("Hello")
        
         const user = await prisma.user.create({
-            data:{name,email,password}
+            data:{name,email,password,role}
         });
         res.send(user);
     } catch (error) {

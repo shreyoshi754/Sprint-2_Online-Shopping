@@ -1,13 +1,19 @@
 const prisma = require('../Db/index')
 exports.addProduct=async(req, res, next) => {
   const { name, price, catagory } = req.body;
-  console.log(req.body)
+  console.log(req.user);
   try {
+    if(req.user.role==='seller'||'admin'){
     const product = await prisma.product.create({
         data:{name,price,catagory}
     });
-    res.send(product);
     console.log("Product added");
+    return res.send(product);
+    }
+    else{
+      return res.send('You are not a seller')
+    }
+
 } catch (error) {
     const errorToThrow = new Error();
     switch (error?.code) {
@@ -21,10 +27,11 @@ exports.addProduct=async(req, res, next) => {
     next(errorToThrow);
 }
 };
+
 exports.viewProduct = async (req, res, next) => {
   let {name, price, catagory} = req.body;
    try{
-      const allProducts = await prisma.user.findMany();
+      const allProducts = await prisma.product.findMany();
   res.send(allProducts);
 }
 catch(err){
