@@ -38,3 +38,18 @@ catch(err){
   console.log(err)
 }
 };
+exports.deleteProduct = async (req, res, next) => {
+  let {name, price, catagory} = req.body;
+   try{
+      var id= req.params.id
+      const deleted = await prisma.product.delete({
+      where: {
+        id: id,
+      },
+    })
+  res.send(deleted);
+}
+catch(err){
+  console.log(err)
+}
+};
