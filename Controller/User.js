@@ -44,12 +44,12 @@ exports.postLogin = async (req, res, next) => {
 		});
 
         if(!existingUser){
-            res.send("No user found");
+           return res.send("No user found");
         }
 
         var passwordMatch = await bcrypt.compare(password, existingUser.password);
         if(!passwordMatch){
-            res.send("Password didn't Match")
+            return res.send("Password didn't Match")
         }
 
         const obj={
