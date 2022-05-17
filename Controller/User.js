@@ -44,12 +44,17 @@ exports.postLogin = async (req, res, next) => {
 		});
 
         if(!existingUser){
-           return res.send("No user found");
+           return res.send({
+               "isLoggedin":false,
+               "status":"user doesn't exist"
+           });
         }
 
         var passwordMatch = await bcrypt.compare(password, existingUser.password);
         if(!passwordMatch){
-            return res.send("Password didn't Match")
+            return res.send({
+                "isLoggedin":false,
+                "status":"Password didn't Match"})
         }
 
         const obj={
@@ -57,7 +62,11 @@ exports.postLogin = async (req, res, next) => {
         }
 
         const token=jwt.sign(obj, process.env.SECRET_KEY)
-        res.send(token)
+        res.send({
+            "isLoggedin":true,
+            "token":token,
+            "status":"Logged in Successfully"
+        })
 
      }catch(err){
         console.log(err)

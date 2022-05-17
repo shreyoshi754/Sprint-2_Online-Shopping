@@ -3,7 +3,10 @@ const prisma = require("../Db/index");
 const auth = async (req, res, next) => {
   try {
     if (!(req.header("Authorization"))) {
-      return res.send("Aceess Denied");
+      return res.send({
+        "isLoggedin":false,
+        "status":"Access Denied"
+      });
     }
     const token = req.header("Authorization").split(" ")[1];
     var authVerify = jwt.verify(token, process.env.SECRET_KEY);

@@ -17,33 +17,33 @@ model User {
   password String
   address  String?
   role     String?
-
-  cart Cart[]
+  cart     Cart?
 }
 
+// Product will also keep track of what cartitems are they being assigned to
 model Product {
-  id         Int       @id @default(autoincrement())
-  name       String
-  price      Float
-  catagory   String
-  cartId     Int?
-  Cartitem   Cartitem? @relation(fields: [cartitemId], references: [id])
-  cartitemId Int?
+  id       Int        @id @default(autoincrement())
+  name     String
+  price    Float
+  catagory String
+  Cartitem Cartitem[]
 }
 
+// Every cart item can only be associated with a single product
 model Cartitem {
-  id    Int   @id @default(autoincrement())
-  price Float
-  item Int
-  Cart    Cart[]
-  Product Product[]
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  cart      Cart    @relation(fields: [cartId], references: [id])
+  cartId    Int
+  item      Int
+  price     Float
 }
 
+// Every cart will have an array of cart items and every cart will also be associated with a single user
 model Cart {
-  id         Int       @id @default(autoincrement())
-  cartItem   Cartitem?  @relation(fields: [cartitemId], references: [id])
-  User       User?     @relation(fields: [userId], references: [id])
-  userId     Int?
-  cartitemId Int
-  price      Float
+  id         Int        @id @default(autoincrement())
+  cartItem   Cartitem[]
+  user       User       @relation(fields: [userId], references: [id])
+  userId     Int        @unique
 }

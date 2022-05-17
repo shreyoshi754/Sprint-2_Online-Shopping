@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const usersRoute = require('./Routes/User'); 
 const productRoute =require('./Routes/Product');
+const cartRoute = require('./Routes/Cart');
 const bodyParser = require('body-parser');
 app.use(bodyParser.json())
 
@@ -13,5 +14,6 @@ const PORT = process.env.PORT || 8080;
 
 app.use(usersRoute);
 app.use(productRoute);
+app.use(cartRoute)
 app.listen(PORT,()=>{
     console.log("Application Started",PORT)})
