@@ -99,8 +99,9 @@ exports.viewCart=async(req,res,next)=>{
         }
         console.log(totalprice)
         res.send({
+            "cart":existingCart,
             "totalPrice":totalprice,
-            "cart":existingCartItem
+            "cartItem":existingCartItem
         })
   
     }catch(err){
@@ -110,7 +111,7 @@ exports.viewCart=async(req,res,next)=>{
 }
 exports.deleteCart=async(req,res,next)=>{
     var userId=parseInt(req.user.id);
-    var id= parseInt(req.params.id);
+
     try{
 
         const existingCart = await prisma.cart.findUnique({
@@ -119,7 +120,7 @@ exports.deleteCart=async(req,res,next)=>{
 			},
 		});
 
-        const deleteCart = await prisma.user.deleteMany({
+        const deleteCart = await prisma.cartitem.deleteMany({
             where: {
                 cartId:existingCart.id
             },
@@ -129,4 +130,86 @@ exports.deleteCart=async(req,res,next)=>{
     catch(err){
       console.log(err)
     }
+}
+
+exports.deleteItem=async(req,res,next)=>{
+
+    var cartItemId= parseInt(req.params.id);
+    console.log(cartItemId);
+    try {
+
+        const deleteCart = await prisma.cartitem.delete({
+            where: {
+                id:cartItemId
+            },
+          })
+        
+          return res.send(deleteCart)
+
+    } catch (error) {
+
+        console.log(error)
+        
+    }
+
+}
+
+exports.decrement=async(req,res,next)=>{
+    var cartItemId= parseInt(req.params.id);
+    try {
+
+        const existingCartItem = await prisma.cartitem.findFirst({
+            where: {
+                id:cartItemId
+            },
+        })
+
+        if(!existingCartItem){
+            return res.send({"Satus":"no such item found"})
+        }
+
+        let productId=existingCartItem.productId;
+
+        const product = await prisma.product.findUnique({
+			where: {
+				id:productId
+			},
+		});
+        
+        console.log(existingCartItem)
+
+        if(existingCartItem.item>1){
+            console.log("Hello")
+            var item = existingCartItem.item-1;
+            var price = existingCartItem.price - product.price;
+            console.log(item,price)
+
+            const cartItem = await prisma.cartitem.update({
+                where: {
+                    id:cartItemId,
+                  },
+                  data: {
+                    price,item
+                  },
+            })
+
+            return res.send(cartItem)
+
+        }
+
+        const deleteCart = await prisma.cartitem.delete({
+            where: {
+                id:cartItemId
+            },
+          })
+        
+          return res.send(deleteCart)
+
+
+        
+
+    } catch (error) {
+        console.log(error)
+    }
+
 }
