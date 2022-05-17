@@ -3,13 +3,13 @@ exports.addCart=async(req,res,next)=>{
     var id= parseInt(req.params.id);
     var userId=parseInt(req.user.id);
     try{
-        //fatching data
+        //fetching data
         const product = await prisma.product.findUnique({
 			where: {
 				id:id
 			},
 		});
-        //fatching cart
+        //fetching cart
         const existingCart = await prisma.cart.findUnique({
 			where: {
 				userId:userId
@@ -32,7 +32,7 @@ exports.addCart=async(req,res,next)=>{
         
     };
     
-   //fatchingCartItems
+   //fetchingCartItems
     const existingCartItem = await prisma.cartitem.findFirst({
         where: {
             productId:id,cartId:existingCart.id
@@ -107,4 +107,26 @@ exports.viewCart=async(req,res,next)=>{
         console.log(err)
     }
     
+}
+exports.deleteCart=async(req,res,next)=>{
+    var userId=parseInt(req.user.id);
+    var id= parseInt(req.params.id);
+    try{
+
+        const existingCart = await prisma.cart.findUnique({
+			where: {
+				userId:userId
+			},
+		});
+
+        const deleteCart = await prisma.user.deleteMany({
+            where: {
+                cartId:existingCart.id
+            },
+          })
+        res.send(deleteCart);
+    }
+    catch(err){
+      console.log(err)
+    }
 }
