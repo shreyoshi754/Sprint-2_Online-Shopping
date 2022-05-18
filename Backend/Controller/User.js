@@ -11,12 +11,28 @@ exports.postSignup = async (req, res, next) => {
     console.l
    
     try {
-        console.log("Hello")
-       
-        const user = await prisma.user.create({
+        var user;
+
+        const existingUser = await prisma.user.findUnique({
+			where: {
+				email,
+			},
+		});
+
+        if(existingUser){
+            return res.send({"registered":false,
+            "status":"user with email "+email+" already exsist",
+        })
+
+        }
+
+        user = await prisma.user.create({
             data:{name,email,password,role}
         });
-        res.send(user);
+
+        return res.send({
+            "registered":true,
+            "user":user});
     } catch (error) {
         res.send(error)
     }
