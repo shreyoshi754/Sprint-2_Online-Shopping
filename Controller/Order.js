@@ -1,10 +1,11 @@
 const prisma = require('../Db/index')
 exports.addOrder = async (req, res, next) => {
-    var id = parseInt(req.params.id);
     var userId = parseInt(req.user.id);
     
     let totalAmount=0;
     
+    var productId = parseInt(req.product.id);
+    let totalprice = 0;
     try {
         const cartitems =await prisma.cartitem.findMany({
             where: {
@@ -63,18 +64,26 @@ exports.viewOrder=async(req,res,next)=>{
 		});
         if(Order.length==0){
             return res.send({
-                "Status":"No Order found"
+                "Status": "No Items found"
             })
         }
         res.send({
             "userid":userId,
             "Order":Order
         })
-  
-    }catch(err){
+        for (var i = 0; i < existingCartItem.length; i++) {
+            totalprice += existingCartItem[i].price
+        }
+        console.log(totalprice)
+        const orderItems = await prisma.order.create({
+            data: { date: Date, product: productId, price: totalprice, userId: userId }
+        })
+        res.send("Items added");
+        return res.send(orderItems);
+
+    } catch (err) {
         console.log(err)
     }
-    
 }
 
 exports.viewOrderDetails = async(req,res,next)=>{
@@ -96,3 +105,27 @@ exports.viewOrderDetails = async(req,res,next)=>{
     }
 
 }
+exports.viewOrder = async (req, res, next) => {
+    var userId = parseInt(req.user.id);
+    let totalprice = 0;
+    try {
+        const existingOrder = await prisma.order.findMany({
+            where: {
+                userId: userId
+            },
+        });
+        if (!existingOrder) {
+            return res.send({
+                "Status": "No Order found"
+            })
+        }
+        else {
+            return res.send(existingOrder);
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+
