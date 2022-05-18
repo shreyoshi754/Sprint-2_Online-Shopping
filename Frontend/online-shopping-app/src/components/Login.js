@@ -1,5 +1,7 @@
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import {fa-regular,fa-circle-user} from '@fortawesome/free-solid-svg-icons'
+import { FaUserCircle,FaEnvelope,} from "react-icons/fa";
+import { FiLock } from "react-icons/fi";
 import './Form.css';
 import { useState } from 'react';
 
@@ -73,7 +75,10 @@ export default function Form() {
 		<div className="container">
 			<div className="form-box">
 				<div className="header-form">
-					<h4 className="text-primary text-center"><i class="fa-solid fa-circle-user" style={{ fontSize: "110px" }}></i></h4>
+					{/* <h4 className="text-primary text-center"><
+					i class="fa-solid fa-circle-user" style={{ fontSize: "110px" }}>
+					</i></h4> */}
+					<h4 className="text-primary text-center"><FaUserCircle style={{ fontSize: "110px",color:"white"}} /></h4>
 					<div className="image">
 					</div>
 				</div>
@@ -81,13 +86,13 @@ export default function Form() {
 					<form>
 						<div className="input-group mb-3">
 							<div className="input-group-prepend">
-								<span className="input-group-text"><i class="fa fa-user"></i></span>
+								<span className="input-group-text"><FaEnvelope style={{margin:"5px"}}/></span>
 							</div>
 							<input type="text" className="form-control" placeholder="Email" />
 						</div>
 						<div className="input-group mb-3">
 							<div className="input-group-prepend">
-								<span className="input-group-text"><i class="fa fa-lock"></i></span>
+								<span className="input-group-text"><FiLock style={{margin:"5px"}}/></span>
 							</div>
 							<input type="text" className="form-control" placeholder="Password" />
 						</div>
@@ -97,11 +102,7 @@ export default function Form() {
 							<div><a href="#">Forgot your password</a></div>
 						</div>
 					</form>
-					<div className="social">
-						<a href="#"><i className="fab fa-facebook"></i></a>
-						<a href="#"><i className="fab fa-twitter-square"></i></a>
-						<a href="#"><i className="fab fa-google"></i></a>
-					</div>
+					
 				</div>
 			</div>
 		</div>
