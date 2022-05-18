@@ -78,3 +78,18 @@ exports.postLogin = async (req, res, next) => {
 exports.getDetails = async(req,res)=>{
     return res.send(req.user);
 }
+
+exports.update=async(req,res)=>{
+    userId= parseInt(req.body.id);
+    const {name,email,address}=req.body;
+
+    const updateUser = await prisma.user.update({
+        where: {
+            id:userId,
+          },
+          data: {
+            name,email,address
+          },
+    })
+    res.send(updateUser);
+}
