@@ -18,17 +18,17 @@ model User {
   address  String?
   role     String?
   cart     Cart?
-  Order    Order?
+  Order    Order[]
 }
 
 // Product will also keep track of what cartitems are they being assigned to
 model Product {
-  id       Int        @id @default(autoincrement())
-  name     String
-  price    Float
-  catagory String
-  Cartitem Cartitem[]
-  Order   Order[]
+  id        Int         @id @default(autoincrement())
+  name      String
+  price     Float
+  catagory  String
+  Cartitem  Cartitem[]
+  Orderitem Orderitem[]
 }
 
 // Every cart item can only be associated with a single product
@@ -50,11 +50,21 @@ model Cart {
   userId   Int        @unique
 }
 
+model Orderitem {
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id])
+  productId Int
+  item      Int
+  price     Float
+  Order     Order  @relation(fields: [orderId], references: [id])
+  orderId   Int
+}
+
 model Order {
-  id      Int       @id @default(autoincrement())
-  date    DateTime
-  product Product[]
-  user    User      @relation(fields: [userId], references: [id])
-  price   Float
-  userId Int
+  id        Int         @id @default(autoincrement())
+  Orderitem Orderitem[]
+  user      User        @relation(fields: [userId], references: [id])
+  userId    Int
+  totalAmount Float @default(0.0)
+
 }

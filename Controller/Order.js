@@ -2,48 +2,97 @@ const prisma = require('../Db/index')
 exports.addOrder = async (req, res, next) => {
     var id = parseInt(req.params.id);
     var userId = parseInt(req.user.id);
+    
+    let totalAmount=0;
+    
     try {
-        const existingCart = await prisma.cart.findUnique({
+        const cartitems =await prisma.cartitem.findMany({
             where: {
-                userId: userId
-            },
-        });
-        const existingCartItem = await prisma.cartitem.findFirst({
+                cartId:id
+            },   
+        })
+        
+        
+        if(cartitems.length==0){
+            return res.send("Cart is Empty");
+        }
+        const order = await prisma.order.create({
+            data:{userId}
+        })
+        
+        for(let i=0;i<cartitems.length;i++){
+            const orderItems = await prisma.orderitem.create({
+                data:{productId:cartitems[i].productId,
+                    item:cartitems[i].item,
+                    price:cartitems[i].price,
+                    orderId:order.id}
+            })
+            console.log(orderItems);
+            totalAmount = totalAmount + cartitems[i].price
+        }
+        
+        const updateOrder = await prisma.order.update({
             where: {
-                productId: id, cartId: existingCart.id
+                id:order.id,
+              },
+              data: {
+                totalAmount
+              },
+        })
+        const deleteCart = await prisma.cartitem.deleteMany({
+            where: {
+                cartId:id
             },
-        });
-        const orderItems = await prisma.order.create({
-            data: { orderid: existingCartItem.id, userId: userId, price: existingCartItem.price }
-        });
-        return res.send(orderItems);
+          })
+        res.send(updateOrder);
+        
+
+    } catch (error) {
+        return res.send(error)
+        
     }
-    catch (err) {
-        console.log(err);
-    }
+
 }
 exports.viewOrder=async(req,res,next)=>{
     var userId=parseInt(req.user.id);
-    var orderid = parseInt(req.order.orderid);
     try{
-        const existingOrder = await prisma.cart.findUnique({
+        const Order = await prisma.order.findMany({
 			where: {
 				userId:userId
 			},
 		});
-        if(!existingOrder){
+        if(Order.length==0){
             return res.send({
                 "Status":"No Order found"
             })
         }
         res.send({
-            "orders":existingOrder,
-            "orderid":orderid,
-            "userid":userId
+            "userid":userId,
+            "Order":Order
         })
   
     }catch(err){
         console.log(err)
     }
     
+}
+
+exports.viewOrderDetails = async(req,res,next)=>{
+    var id = parseInt(req.params.id);
+    try {
+        const orderItems =await prisma.orderitem.findMany({
+            where: {
+                orderId:id
+            },   
+        })
+        console.log(id);
+        if(orderItems.length==0){
+            return res.send("Nothing Ordered");
+        }
+        return res.send(orderItems);
+        
+    } catch (error) {
+        
+    }
+
 }
