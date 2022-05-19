@@ -3,9 +3,11 @@ import { useState } from "react";
 import { FaUserCircle,FaEnvelope,} from "react-icons/fa";//MdOutlineDriveFileRenameOutline
 import { FiLock } from "react-icons/fi";
 import { SiNamecheap,SiChevrolet } from "react-icons/si";
+import { useNavigate } from "react-router-dom";
 
 export default function Form() {
   // States for registration
+  let navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -113,7 +115,7 @@ export default function Form() {
             </div>
             <div className="input-group mb-3">
               
-              <label>
+              <label style={{color:'#088F8F'}}>
                 Role :
                 <select value={role} >
                   <option value="user">User</option>
@@ -123,7 +125,9 @@ export default function Form() {
             </div>
             <button type="button" className="btn btn-secondary btn-block">
               REGISTER
-            </button>
+            </button><br/>
+            <label style={{color:'#088F8F'}}>Already have an Account</label>
+						<div><a href="#" onClick={navigate(`/login`)}>Login here</a></div>
           </form>
           
         </div>

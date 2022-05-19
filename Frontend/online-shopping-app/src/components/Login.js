@@ -4,9 +4,19 @@ import { FaUserCircle,FaEnvelope,} from "react-icons/fa";
 import { FiLock } from "react-icons/fi";
 import './Form.css';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
+import {useSelector, useDispatch} from 'react-redux';
+import { setLogin } from "../Actions/action";
+
+
 
 export default function Form() {
 
+
+	let navigate = useNavigate();
+	let dispatch = useDispatch();
+	const temp = useSelector(state => state)
 	// States for registration
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
@@ -21,7 +31,7 @@ export default function Form() {
 		setName(e.target.value);
 		setSubmitted(false);
 	};
-
+	console.log(temp)
 	// Handling the email change
 	const handleEmail = (e) => {
 		setEmail(e.target.value);
@@ -44,7 +54,13 @@ export default function Form() {
 			setError(false);
 		}
 	};
+	const handleTry =(e)=>{
+		e.preventDefault()
+		dispatch(setLogin('xyz'));
 
+		
+
+	}
 	// Showing success message
 	const successMessage = () => {
 		return (
@@ -96,11 +112,13 @@ export default function Form() {
 							</div>
 							<input type="text" className="form-control" placeholder="Password" />
 						</div>
-						<button type="button" className="btn btn-secondary btn-block">LOGIN</button>
+						<button type="button" className="btn btn-secondary btn-block" >LOGIN</button>
 						<div className="message">
-							<div><input type="checkbox" /> Remember ME</div>
+							<div><input type="checkbox" style={{color:'#088F8F'}} /> Remember ME</div>
 							<div><a href="#">Forgot your password</a></div>
 						</div>
+						<label style={{color:'#088F8F'}}>New User</label>
+						<div><a href="#" onClick={navigate(`/register`)}>Register here</a></div>
 					</form>
 					
 				</div>
