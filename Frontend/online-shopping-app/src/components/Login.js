@@ -6,10 +6,11 @@ import "./Form.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-
+import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios';
 import { useSelector, useDispatch } from "react-redux";
 import { setLogin } from "../Actions/action";
-import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Form() {
   let navigate = useNavigate();
@@ -24,9 +25,8 @@ export default function Form() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
 
-  // Handling the name change
 
-  //console.log(temp)
+  console.log(temp)
   //Handling the email change
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -40,7 +40,7 @@ export default function Form() {
   };
 
   // Handling the form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (email === "" || password === "") {
       console.log("error");
@@ -56,9 +56,45 @@ export default function Form() {
     } else {
       setSubmitted(true);
       setError(false);
-      dispatch(setLogin("xyz"));
-      console.log(email, password);
-      navigate(`/`);
+	  const credentials ={email,password}
+	  console.log(credentials)
+		try {
+			const response = await axios.post(`http://localhost:8083/login`,{...credentials});
+			console.log(response);
+			const {isLoggedin,status,token}=response.data;
+			console.log(isLoggedin);
+			console.log(status);
+			console.log(token);
+			if(!isLoggedin){
+				toast.dark(status, {
+					position: "top-right",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				  });
+			}else{
+				toast.dark("Login Successfull", {
+					position: "top-right",
+					autoClose: 5000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+				  });
+
+				  dispatch(setLogin(`Bearer ${token}`));
+				  navigate(`/`);
+
+			}
+
+			
+		} catch (error) {
+			
+		}
     }
   };
   const handleTry = (e) => {
@@ -99,9 +135,6 @@ export default function Form() {
     <div className="container">
       <div className="form-box">
         <div className="header-form">
-          {/* <h4 className="text-primary text-center"><
-					i class="fa-solid fa-circle-user" style={{ fontSize: "110px" }}>
-					</i></h4> */}
           <h4 className="text-primary text-center">
             <FaUserCircle style={{ fontSize: "110px", color: "white" }} />
           </h4>
@@ -116,7 +149,7 @@ export default function Form() {
                 </span>
               </div>
               <input
-                type="text"
+                type="email"
                 className="form-control"
                 placeholder="Email"
                 onChange={handleEmail}
@@ -155,9 +188,10 @@ export default function Form() {
             </div>
             <label style={{ color: "#088F8F" }}>New User</label>
             <div>
-              <a href="#" onClick={navigate(`/Register`)}>Register here</a>
+              
             </div>
           </form>
+		  <a href="#" >Register here</a>
         </div>
       </div>
       <ToastContainer
