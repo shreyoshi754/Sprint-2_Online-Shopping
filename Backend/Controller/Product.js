@@ -32,7 +32,7 @@ exports.viewProduct = async (req, res, next) => {
   let { name, price, catagory } = req.body;
   try {
     const allProducts = await prisma.product.findMany();
-    res.send(allProducts);
+    res.send({"productList":allProducts});
   }
   catch (err) {
     console.log(err)
