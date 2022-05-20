@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Login from './Components/Login';
 import Register from './Components/Register'
+import Nav from "./Layouts/Nav";
 
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,6 +12,7 @@ function App() {
   return (
     <Router>
             <nav>
+              <Nav />
                 <ul>
                     <li><Link to="/register">Register</Link></li>
                     <li><Link to="/login">Login</Link></li>

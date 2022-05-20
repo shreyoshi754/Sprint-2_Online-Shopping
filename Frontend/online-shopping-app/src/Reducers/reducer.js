@@ -21,7 +21,8 @@ const reducer=(state=intialState,action)=> {
                     return {
                         ...intialState,
                         auth:false,
-                        token:null
+                        token:null,
+                        user:null,
                     }
         }
     
