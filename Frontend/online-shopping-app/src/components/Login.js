@@ -59,7 +59,8 @@ export default function Form() {
 	  const credentials ={email,password}
 	  console.log(credentials)
 		try {
-			const response = await axios.post(`http://localhost:8083/login`,{...credentials});
+			const response = await axios.post(`http://localhost:8080/login`,{...credentials});
+      console.log("hello");
 			console.log(response);
 			const {isLoggedin,status,token}=response.data;
 			console.log(isLoggedin);
@@ -95,40 +96,8 @@ export default function Form() {
 		} catch (error) {
 			
 		}
+    
     }
-  };
-  const handleTry = (e) => {
-    e.preventDefault();
-    dispatch(setLogin("xyz"));
-    console.log(email, password);
-    navigate(`/`);
-  };
-  // Showing success message
-  const successMessage = () => {
-    return (
-      <div
-        className="success"
-        style={{
-          display: submitted ? "" : "none",
-        }}
-      >
-        <h1>User {name} successfully registered!!</h1>
-      </div>
-    );
-  };
-
-  // Showing error message if error is true
-  const errorMessage = () => {
-    return (
-      <div
-        className="error"
-        style={{
-          display: error ? "" : "none",
-        }}
-      >
-        <h1>Please enter all the fields</h1>
-      </div>
-    );
   };
 
   return (
@@ -188,10 +157,10 @@ export default function Form() {
             </div>
             <label style={{ color: "#088F8F" }}>New User</label>
             <div>
-              
+            <a href="#" onClick={()=>navigate("/register")}>Register here</a> 
             </div>
           </form>
-		  <a href="#" >Register here</a>
+		  <a href="#">Register here</a>
         </div>
       </div>
       <ToastContainer
