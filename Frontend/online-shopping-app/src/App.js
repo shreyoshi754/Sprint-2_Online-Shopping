@@ -18,11 +18,17 @@ function App() {
                   </ul>
               </nav>
             <Routes>
+<<<<<<< HEAD
 
             <Route exact path="/" element={<Home/>} />
             <Route exact path="/register" element={<Register/>} />
             <Route exact path="/login" element={<Login/>} />
             <Route exact path="/addproduct" element={<ProductForm/>} />
+=======
+            <Route path="/" element={<Home/>} />
+            <Route path="/register" element={<Register/>} />
+            <Route path="/login" element={<Login/>} />
+>>>>>>> 3e1ffeea4b22e6e01bdf53fc4adc8cc19318a125
               
               
             </Routes>

@@ -10,7 +10,7 @@ import axios from 'axios';
 
 export default function Form() {
   // States for registration
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -168,9 +168,15 @@ export default function Form() {
             </div>
             <button type="button" className="btn btn-secondary btn-block" onClick={handleSubmit}>
               REGISTER
+<<<<<<< HEAD
             </button><br />
             <label style={{ color: '#088F8F' }}>Already have an Account</label>
             <div><a href="#" onClick={() => navigate("/login")}>Register here</a></div>
+=======
+            </button><br/>
+            <label style={{color:'#088F8F'}}>Already have an Account</label>
+						<div><a href="#" onClick={()=>navigate("/login")}  >Login here</a></div>
+>>>>>>> 3e1ffeea4b22e6e01bdf53fc4adc8cc19318a125
           </form>
 
         </div>
