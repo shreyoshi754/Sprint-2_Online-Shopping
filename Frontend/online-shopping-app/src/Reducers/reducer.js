@@ -1,7 +1,8 @@
 import React from 'react';
 let intialState={
     'auth':true,
-    'token':null
+    'token':null,
+    'user':null
 }
 
 const reducer=(state=intialState,action)=> {
@@ -13,7 +14,8 @@ const reducer=(state=intialState,action)=> {
                 return {
                     ...intialState,
                     auth:true,
-                    token:action.payload
+                    token:action.payload,
+                    user:action.user
                 }
                 case 'SET_LOGOUT':
                     return {

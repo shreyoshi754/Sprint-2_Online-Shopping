@@ -1,21 +1,22 @@
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import {fa-regular,fa-circle-user} from '@fortawesome/free-solid-svg-icons'
-import { FaUserCircle, FaEnvelope } from "react-icons/fa";
-import { FiLock } from "react-icons/fi";
-import "./Form.css";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { FaEnvelope, FaUserCircle } from "react-icons/fa";
+import { FiLock } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { setLogin } from "../Actions/action";
+import "./Form.css";
 
 
 export default function Form() {
 	const navigate = useNavigate();
   let dispatch = useDispatch();
   const temp = useSelector((state) => state);
+  
   //States for registration
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -26,7 +27,6 @@ export default function Form() {
   const [error, setError] = useState(false);
 
 
-  console.log(temp)
   //Handling the email change
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -61,7 +61,7 @@ export default function Form() {
 		try {
 			const response = await axios.post(`http://localhost:8083/login`,{...credentials});
 			console.log(response);
-			const {isLoggedin,status,token}=response.data;
+			const {isLoggedin,status,token,user}=response.data;
 			console.log(isLoggedin);
 			console.log(status);
 			console.log(token);
@@ -86,7 +86,7 @@ export default function Form() {
 					progress: undefined,
 				  });
 
-				  dispatch(setLogin(`Bearer ${token}`));
+				  dispatch(setLogin(`Bearer ${token}`,user));
 
 			}
 

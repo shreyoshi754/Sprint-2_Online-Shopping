@@ -72,7 +72,8 @@ exports.postLogin = async (req, res, next) => {
         res.send({
             "isLoggedin":true,
             "token":token,
-            "status":"Logged in Successfully"
+            "status":"Logged in Successfully",
+            "user":existingUser
         })
 
      }catch(err){

@@ -1,8 +1,9 @@
 
-export const setLogin= (token) =>{
+export const setLogin= (token,user) =>{
     return{
         type:'SET_LOGIN',
-        payload:token
+        payload:token,
+        user
     }
 
 }
