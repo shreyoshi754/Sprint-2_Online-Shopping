@@ -23,6 +23,14 @@ export default function ProductForm() {
     setName(e.target.value);
     setSubmitted(false);
   };
+  const handlePrice = (e) => {
+    setName(e.target.value);
+    setSubmitted(false);
+  };
+  const handleCatagory = (e) => {
+    setName(e.target.value);
+    setSubmitted(false);
+  };
 
   // Handling the form submission
   const handleSubmit = (e) => {

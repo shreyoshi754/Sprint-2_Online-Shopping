@@ -95,43 +95,9 @@ export default function Form() {
 		} catch (error) {
 			
 		}
-<<<<<<< HEAD
     
     }
   };
-=======
-		navigate("/")
-    }
-  };
-
-  // Showing success message
-  const successMessage = () => {
-    return (
-      <div
-        className="success"
-        style={{
-          display: submitted ? "" : "none",
-        }}
-      >
-        <h1>User {name} successfully registered!!</h1>
-      </div>
-    );
-  };
-
-  // Showing error message if error is true
-  const errorMessage = () => {
-    return (
-      <div
-        className="error"
-        style={{
-          display: error ? "" : "none",
-        }}
-      >
-        <h1>Please enter all the fields</h1>
-      </div>
-    );
-  };
->>>>>>> 3e1ffeea4b22e6e01bdf53fc4adc8cc19318a125
 
   return (
     <div className="container">
@@ -193,11 +159,6 @@ export default function Form() {
             <a href="#" onClick={()=>navigate("/register")}>Register here</a> 
             </div>
           </form>
-<<<<<<< HEAD
-		  <a href="#">Register here</a>
-=======
-		  <a href="#" onClick={()=>navigate("/register")}>Register here</a>
->>>>>>> 3e1ffeea4b22e6e01bdf53fc4adc8cc19318a125
         </div>
       </div>
       <ToastContainer

@@ -1,41 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import ViewProduct from './ViewProduct';
 function Home(props) {
 
-    const[allProductList,setAllProductList]=useState([]);
+    const [allProductList, setAllProductList] = useState([]);
 
-    const fatchProduct =async(e)=>{
-        
+    const fatchProduct = async (e) => {
+
         try {
             const response = await axios.get(`http://localhost:8080/view`)
-            const {productList} = response.data;
+            const { productList } = response.data;
             setAllProductList(productList);
         } catch (error) {
             console.log(error)
-            
+
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         fatchProduct()
-    },[])
-console.log(allProductList)
-    
-    
+    }, [])
+    console.log(allProductList)
+
+
     return (
+
         <div>
-           <h1>I am home</h1> 
-           {allProductList.map((product)=>
-           <div key={product.id}>
-            
-           <h1 >{product.id}</h1>
-           <p >{product.name}</p>
-           <p >{product.price}</p>
-           
-           </div>
-           
-           )}
+            <h1>I am home</h1>
+            {allProductList.map((product) =>
+                <ViewProduct key={product.id} title={product.name}
+                    description={product.catagory}
+                    price={product.price} />
+
+
+            )}
         </div>
     );
 }
