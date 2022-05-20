@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Form() {
   // States for registration
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -127,7 +127,7 @@ export default function Form() {
               REGISTER
             </button><br/>
             <label style={{color:'#088F8F'}}>Already have an Account</label>
-						<div><a href="#" onClick={navigate(`/login`)}>Login here</a></div>
+						<div><a href="#" onClick={()=>navigate("/login")}  >Login here</a></div>
           </form>
           
         </div>

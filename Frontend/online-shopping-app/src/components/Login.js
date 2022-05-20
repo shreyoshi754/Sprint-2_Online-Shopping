@@ -13,7 +13,7 @@ import { setLogin } from "../Actions/action";
 
 
 export default function Form() {
-  let navigate = useNavigate();
+	const navigate = useNavigate();
   let dispatch = useDispatch();
   const temp = useSelector((state) => state);
   //States for registration
@@ -87,7 +87,6 @@ export default function Form() {
 				  });
 
 				  dispatch(setLogin(`Bearer ${token}`));
-				  navigate(`/`);
 
 			}
 
@@ -95,14 +94,10 @@ export default function Form() {
 		} catch (error) {
 			
 		}
+		navigate("/")
     }
   };
-  const handleTry = (e) => {
-    e.preventDefault();
-    dispatch(setLogin("xyz"));
-    console.log(email, password);
-    navigate(`/`);
-  };
+
   // Showing success message
   const successMessage = () => {
     return (
@@ -191,7 +186,7 @@ export default function Form() {
               
             </div>
           </form>
-		  <a href="#" >Register here</a>
+		  <a href="#" onClick={()=>navigate("/register")}>Register here</a>
         </div>
       </div>
       <ToastContainer

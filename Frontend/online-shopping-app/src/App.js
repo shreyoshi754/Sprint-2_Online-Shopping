@@ -17,10 +17,9 @@ function App() {
                   </ul>
               </nav>
             <Routes>
-
-            <Route exact path="/" element={<Home/>} />
-            <Route exact path="/register" element={<Register/>} />
-            <Route exact path="/login" element={<Login/>} />
+            <Route path="/" element={<Home/>} />
+            <Route path="/register" element={<Register/>} />
+            <Route path="/login" element={<Login/>} />
               
               
             </Routes>
