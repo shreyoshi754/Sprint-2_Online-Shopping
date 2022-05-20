@@ -8,7 +8,7 @@ function Home(props) {
     const fatchProduct =async(e)=>{
         
         try {
-            const response = await axios.get(`http://localhost:8080/view`)
+            const response = await axios.get(`http://localhost:8083/view`)
             const {productList} = response.data;
             setAllProductList(productList);
         } catch (error) {

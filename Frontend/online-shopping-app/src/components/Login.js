@@ -59,7 +59,7 @@ export default function Form() {
 	  const credentials ={email,password}
 	  console.log(credentials)
 		try {
-			const response = await axios.post(`http://localhost:8080/login`,{...credentials});
+			const response = await axios.post(`http://localhost:8083/login`,{...credentials});
       console.log("hello");
 			console.log(response);
 			const {isLoggedin,status,token,user}=response.data;
@@ -88,6 +88,7 @@ export default function Form() {
 				  });
 
 				  dispatch(setLogin(`Bearer ${token}`,user));
+				  navigate("/")
 
 			}
 
@@ -95,12 +96,7 @@ export default function Form() {
 		} catch (error) {
 			
 		}
-<<<<<<< HEAD
-    
-    }
-  };
-=======
-		navigate("/")
+		
     }
   };
 
@@ -131,7 +127,6 @@ export default function Form() {
       </div>
     );
   };
->>>>>>> 3e1ffeea4b22e6e01bdf53fc4adc8cc19318a125
 
   return (
     <div className="container">
@@ -193,11 +188,6 @@ export default function Form() {
             <a href="#" onClick={()=>navigate("/register")}>Register here</a> 
             </div>
           </form>
-<<<<<<< HEAD
-		  <a href="#">Register here</a>
-=======
-		  <a href="#" onClick={()=>navigate("/register")}>Register here</a>
->>>>>>> 3e1ffeea4b22e6e01bdf53fc4adc8cc19318a125
         </div>
       </div>
       <ToastContainer

@@ -54,7 +54,7 @@ export default function Form() {
       console.log(name, email, password, role);
       const obj = {name, email, password, role};
       try {
-        const response = await axios.post(`http://localhost:8080/signup`, { ...obj });
+        const response = await axios.post(`http://localhost:8083/signup`, { ...obj });
         console.log("hello");
         console.log(response);
         const {registered} = response.data;
@@ -168,15 +168,9 @@ export default function Form() {
             </div>
             <button type="button" className="btn btn-secondary btn-block" onClick={handleSubmit}>
               REGISTER
-<<<<<<< HEAD
-            </button><br />
-            <label style={{ color: '#088F8F' }}>Already have an Account</label>
-            <div><a href="#" onClick={() => navigate("/login")}>Register here</a></div>
-=======
             </button><br/>
             <label style={{color:'#088F8F'}}>Already have an Account</label>
 						<div><a href="#" onClick={()=>navigate("/login")}  >Login here</a></div>
->>>>>>> 3e1ffeea4b22e6e01bdf53fc4adc8cc19318a125
           </form>
 
         </div>
