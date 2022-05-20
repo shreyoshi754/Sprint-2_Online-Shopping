@@ -132,7 +132,7 @@ export default function Form() {
                 </span>
               </div>
               <input
-                type="text"
+                type="password"
                 className="form-control"
                 placeholder="Password"
                 onChange={handlePassword}
