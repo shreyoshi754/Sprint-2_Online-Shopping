@@ -10,7 +10,7 @@ exports.addProduct = async (req, res, next) => {
       const product = await prisma.product.create({
         data: { name, price, catagory,url }
       });
-      console.log("Product added");
+      console.log("Product added Sucessfully");
       return res.send(product);
     }
     else {
