@@ -80,6 +80,10 @@ function Nav(props) {
     event.preventDefault();
     dispatch(setLogout());
   }
+  const handleAddProduct=(event)=>{
+    event.preventDefault();
+    navigate("/addproduct");
+  }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -244,6 +248,9 @@ function Nav(props) {
               </MenuItem>
               <MenuItem  onClick={handleCloseUserMenu}>
                 <Typography textAlign="center">Order</Typography>
+              </MenuItem>
+              <MenuItem  onClick={handleAddProduct}>
+                <Typography textAlign="center">Add Product</Typography>
               </MenuItem>
               <MenuItem  onClick={handleLogout}>
                 <Typography textAlign="center">Logout</Typography>

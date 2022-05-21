@@ -6,6 +6,8 @@ import { SiNamecheap,SiChevrolet } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 import {IoIosPricetags } from "react-icons/io";
 import {BiCategoryAlt} from "react-icons/bi";
+import axios from "axios";
+import { useSelector } from "react-redux";
 import {
   ref,
   uploadBytes,
@@ -15,6 +17,9 @@ import { storage } from "../Firebase/firebase";
 export default function ProductForm() {
   // States for registration
   let navigate = useNavigate();
+  const temp = useSelector((state) => state);
+  console.log(temp.token);
+  const token = temp.token;
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [catagory, setCatagory] = useState("");
@@ -22,12 +27,14 @@ export default function ProductForm() {
 
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState(null);
+  let newDate = new Date();
+  console.log(newDate);
 //image upload to firebase
   const imagesListRef = ref(storage, "images/");
   const uploadFile = (e) => {
     e.preventDefault();
     if (imageUpload == null) return;
-    const imageRef = ref(storage, `images/${imageUpload.name}`);
+    const imageRef = ref(storage, `images/${imageUpload.name + newDate }`);
     uploadBytes(imageRef, imageUpload).then((snapshot) => {
       getDownloadURL(snapshot.ref).then((url) => {
         setImageUrls(url);
@@ -45,29 +52,44 @@ export default function ProductForm() {
     setSubmitted(false);
   };
   const handlePrice = (e) => {
-    setName(e.target.value);
+    setPrice(e.target.value);
     setSubmitted(false);
   };
   const handleCatagory = (e) => {
-    setName(e.target.value);
+    setCatagory(e.target.value);
     setSubmitted(false);
   };
 
+  const obj = {name: name, price: price, catagory: catagory, url: imageUrls};
+  console.log(obj);
   // Handling the form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
+    console.log("heyyyyyyyyyyyyyyyyy");
     e.preventDefault();
     if (name === "" || price === "" || catagory === "") {
       setError(true);
     } else {
       setSubmitted(true);
       setError(false);
+      try{
+        const response = await axios.post(`http://localhost:8080/add`, {
+          headers: {
+            'Authorization': token
+          }
+        }, obj);
+        console.log("hello");
+        console.log(response);
+      }
+      catch(error){
+        console.log(error);
+      }
     }
   };
   console.log(imageUrls);
   return (
     <div style={{marginTop:"12%"}}> 
       <div className="img-component">
-      <img src={imageUrls} style={{width:"100px",height:"100px"}} /><br/>
+      <img src={imageUrls} style={{width:"200px",height:"200px"}} /><br/>
       </div>
     <div className="container">
       <div className="form-box">
@@ -85,7 +107,7 @@ export default function ProductForm() {
                 <SiNamecheap style={{margin:"5px"}}/>
                 </span>
               </div>
-              <input type="text" className="form-control" placeholder="Name" />
+              <input type="text" className="form-control" placeholder="Name" onChange = {handleName}/>
             </div>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
@@ -93,7 +115,7 @@ export default function ProductForm() {
                 <IoIosPricetags style={{margin:"5px"}}/>
                 </span>
               </div>
-              <input type="text" className="form-control" placeholder="Price" />
+              <input type="text" className="form-control" placeholder="Price" onChange={handlePrice}/>
             </div>
             <div className="input-group mb-3">
               <div className="input-group-prepend">
@@ -105,6 +127,7 @@ export default function ProductForm() {
                 type="text"
                 className="form-control"
                 placeholder="Catagory"
+                onChange={handleCatagory}
               />
             </div>
             <input
@@ -115,7 +138,7 @@ export default function ProductForm() {
       /><br />
       <button onClick={uploadFile}> Upload Image</button><br />
 
-            <button type="button" className="btn btn-secondary btn-block">
+            <button type="button" className="btn btn-secondary btn-block" onClick={handleSubmit}>
               ADD PRODUCT
             </button><br/>
           </form>

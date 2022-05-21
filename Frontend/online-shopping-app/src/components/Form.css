@@ -17,10 +17,10 @@ body{
   .img-component{
      display:flex;
       justify-content:center;
-      height:5vh;
+      height:30vh;
       width:100%;
       flex-wrap: wrap;
-
+      align-items:flex-end;
   }
   .containerCard{
     display: grid;
