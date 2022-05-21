@@ -1,14 +1,14 @@
 import logo from "./logo.svg";
-import Login from './components/Login';
-import Register from './components/Register'
+import Login from './Components/Login';
+import Register from './Components/Register'
 import Nav from "./Layouts/Nav";
-import ProductForm from "./components/ProductForm";
-import ViewCart from "./components/ViewCart";
+import ProductForm from "./Components/ProductForm";
+import ViewCart from "./Components/ViewCart";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route,Routes,Link } from "react-router-dom";
-import Home from "./components/Home";
-import ViewProduct from "./components/ViewProduct";
+import Home from "./Components/Home";
+import ViewProduct from "./Components/ViewProduct";
 function App() {
   return (
     <Router>
