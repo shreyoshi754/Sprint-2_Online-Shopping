@@ -64,6 +64,7 @@ function Nav(props) {
       }));
 
     let t;
+    let role;
     const navigate = useNavigate();
     let dispatch = useDispatch();
     const temp = useSelector((state) => state);
@@ -71,6 +72,7 @@ function Nav(props) {
     if (typeof temp !== 'undefined' ){
        if(temp.user){
         t=temp.user.name
+        role=temp.user.role
        }
     }
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -249,9 +251,10 @@ function Nav(props) {
               <MenuItem  onClick={handleCloseUserMenu}>
                 <Typography textAlign="center">Order</Typography>
               </MenuItem>
-              <MenuItem  onClick={handleAddProduct}>
+              {role==='seller' ?
+                <MenuItem  onClick={handleAddProduct}>
                 <Typography textAlign="center">Add Product</Typography>
-              </MenuItem>
+              </MenuItem>:<></>}
               <MenuItem  onClick={handleLogout}>
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>
