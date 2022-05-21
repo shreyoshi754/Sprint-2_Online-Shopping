@@ -8,7 +8,7 @@ function Home(props) {
     const fatchProduct = async (e) => {
 
         try {
-            const response = await axios.get(`http://localhost:8080/view`)
+            const response = await axios.get(`http://localhost:8083/view`)
             const { productList } = response.data;
             setAllProductList(productList);
         } catch (error) {
@@ -31,7 +31,7 @@ function Home(props) {
             {allProductList.map((product) =>
                 <ViewProduct key={product.id} title={product.name}
                     description={product.catagory}
-                    price={product.price} />
+                    price={product.price} url={product.url}/>
 
 
 

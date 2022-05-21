@@ -1,7 +1,10 @@
 const prisma = require('../Db/index')
 exports.addProduct = async (req, res, next) => {
-  const { name, price, catagory,url } = req.body;
+  let { name, price, catagory, url } = req.body;
+  price = parseFloat(price);
   console.log(req.user);
+
+  
   try {
     if (req.user.role === 'seller') {
       const product = await prisma.product.create({
@@ -16,6 +19,7 @@ exports.addProduct = async (req, res, next) => {
 
   } catch (error) {
     const errorToThrow = new Error();
+    console.log(error);
     switch (error?.code) {
       case '23505':
         errorToThrow.message = 'Product already exists';
@@ -29,9 +33,9 @@ exports.addProduct = async (req, res, next) => {
 };
 
 exports.viewProduct = async (req, res, next) => {
-  let { name, price, catagory } = req.body;
   try {
     const allProducts = await prisma.product.findMany();
+    console.log(allProducts);
     res.send({"productList":allProducts});
   }
   catch (err) {

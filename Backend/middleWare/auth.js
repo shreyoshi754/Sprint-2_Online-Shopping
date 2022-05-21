@@ -2,19 +2,24 @@ const jwt = require("jsonwebtoken");
 const prisma = require("../Db/index");
 const auth = async (req, res, next) => {
   try {
+    console.log(req.header);
     if (!(req.header("Authorization"))) {
       return res.send({
         "isLoggedin":false,
         "status":"Access Denied"
       });
     }
+    
     const token = req.header("Authorization").split(" ")[1];
+    console.log(token);
     var authVerify = jwt.verify(token, process.env.SECRET_KEY);
+    
     const user = await prisma.user.findFirst({
       where: { id: authVerify.unique },
     });
-
+  
     req.user = user;
+  
     next();
   } catch (err) {
     console.log(err);

@@ -54,7 +54,7 @@ export default function Form() {
       console.log(name, email, password, role);
       const obj = {name, email, password, role};
       try {
-        const response = await axios.post(`http://localhost:8080/signup`, { ...obj });
+        const response = await axios.post(`http://localhost:8083/signup`, { ...obj });
         console.log("hello");
         console.log(response);
         const {registered} = response.data;
