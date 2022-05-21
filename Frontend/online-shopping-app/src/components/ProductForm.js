@@ -10,6 +10,9 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../Firebase/firebase";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 export default function ProductForm() {
   // States for registration
   let navigate = useNavigate();
@@ -79,10 +82,30 @@ export default function ProductForm() {
           {
             headers: headers,
           }
-          
         );
-
-        console.log("hello");
+        const {isAdded,status}= response.data;
+        if(isAdded){
+        toast.success(status,{
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
+          navigate(`/`);
+        }else{
+          toast.error(status,{
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+        }
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -167,6 +190,7 @@ export default function ProductForm() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

@@ -29,7 +29,9 @@ function Home(props) {
             <h1>I am home</h1>
             <div className="containerCard">
             {allProductList.map((product) =>
-                <ViewProduct key={product.id} title={product.name}
+                <ViewProduct key={product.id} 
+                id={product.id}
+                title={product.name}
                     description={product.catagory}
                     price={product.price} url={product.url}/>
 

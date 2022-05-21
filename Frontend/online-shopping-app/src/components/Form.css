@@ -5,6 +5,13 @@ body{
     box-sizing:border-box;
     color:white;
   }
+  .card__img{
+    height: 300px;
+    object-fit: cover;
+    
+
+  }
+  
   
   .container{
     display:flex;
@@ -28,12 +35,14 @@ body{
     grid-auto-rows: minmax(100px, auto);
       height:100%;
       width:100%;
+      
 
   }
 
   .card{
     border: 2px solid royalblue;
     border-radius: 50px 20px;
+    box-shadow: 10px 10px rgba(150,170,180,0.5);
 
     margin: 2rem;
     padding: 1rem;

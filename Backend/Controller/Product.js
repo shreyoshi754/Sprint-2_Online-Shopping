@@ -11,10 +11,10 @@ exports.addProduct = async (req, res, next) => {
         data: { name, price, catagory,url }
       });
       console.log("Product added Sucessfully");
-      return res.send(product);
+      return res.send({"product":product,"isAdded":true,"status":"Product Added Successfully"});
     }
     else {
-      return res.send('You are not a seller')
+      return res.send({"status":"You are not a seller","isAdded":true},)
     }
 
   } catch (error) {
