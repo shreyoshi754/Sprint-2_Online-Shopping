@@ -41,6 +41,8 @@ model Cartitem {
   cartId    Int
   item      Int
   price     Float
+  url       String?
+  productName String
 }
 
 // Every cart will have an array of cart items and every cart will also be associated with a single user

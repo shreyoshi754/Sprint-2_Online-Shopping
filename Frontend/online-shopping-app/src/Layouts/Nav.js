@@ -246,7 +246,7 @@ function Nav(props) {
                 <Typography textAlign="center">Account</Typography>
               </MenuItem>
               <MenuItem  onClick={handleCloseUserMenu}>
-                <Typography textAlign="center">Cart</Typography>
+                <Typography onClick={() => navigate("/viewcart")}textAlign="center">Cart</Typography>
               </MenuItem>
               <MenuItem  onClick={handleCloseUserMenu}>
                 <Typography textAlign="center">Order</Typography>

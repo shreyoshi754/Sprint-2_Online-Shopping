@@ -23,11 +23,11 @@ exports.addCart=async(req,res,next)=>{
             })
 
         const cartItem = await prisma.cartitem.create({
-            data:{productId:id,cartId:cart.id,item:1,price:product.price}
+            data:{productId:id,cartId:cart.id,item:1,price:product.price,url:product.url,productName:product.name}
     
         })
         console.log(cartItem);
-        return res.send(cartItem);
+        return res.send({'cartItem': cartItem, isAdded: true});
 
         
     };
@@ -42,12 +42,12 @@ exports.addCart=async(req,res,next)=>{
     if(!existingCartItem){
 
         const cartItem = await prisma.cartitem.create({
-            data:{productId:id,cartId:existingCart.id,item:1,price:product.price}
+            data:{productId:id,cartId:existingCart.id,item:1,price:product.price,url:product.url,productName:product.name}
     
         })
 
         console.log(cartItem);
-        return res.send(cartItem);
+        return res.send({'cartItem': cartItem, isAdded: true});
 
     }
 
@@ -61,7 +61,7 @@ exports.addCart=async(req,res,next)=>{
             price,item
           },
     })
-    return res.send(cartItem);
+    return res.send({'cartItem': cartItem, isAdded: true});
 
     }catch(err){
         console.log(err);
