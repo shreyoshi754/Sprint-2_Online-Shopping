@@ -6,13 +6,34 @@ import { SiNamecheap,SiChevrolet } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 import {IoIosPricetags } from "react-icons/io";
 import {BiCategoryAlt} from "react-icons/bi";
-//BiCategoryAlt
+import {
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from "firebase/storage";
+import { storage } from "../Firebase/firebase";
 export default function ProductForm() {
   // States for registration
   let navigate = useNavigate();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [catagory, setCatagory] = useState("");
+
+
+  const [imageUpload, setImageUpload] = useState(null);
+  const [imageUrls, setImageUrls] = useState(null);
+//image upload to firebase
+  const imagesListRef = ref(storage, "images/");
+  const uploadFile = (e) => {
+    e.preventDefault();
+    if (imageUpload == null) return;
+    const imageRef = ref(storage, `images/${imageUpload.name}`);
+    uploadBytes(imageRef, imageUpload).then((snapshot) => {
+      getDownloadURL(snapshot.ref).then((url) => {
+        setImageUrls(url);
+      });
+    });
+  };
 
   // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
@@ -42,8 +63,12 @@ export default function ProductForm() {
       setError(false);
     }
   };
-
+  console.log(imageUrls);
   return (
+    <div style={{marginTop:"12%"}}> 
+      <div className="img-component">
+      <img src={imageUrls} style={{width:"100px",height:"100px"}} /><br/>
+      </div>
     <div className="container">
       <div className="form-box">
         <div className="header-form">
@@ -82,6 +107,14 @@ export default function ProductForm() {
                 placeholder="Catagory"
               />
             </div>
+            <input
+        type="file"
+        onChange={(event) => {
+          setImageUpload(event.target.files[0]);
+        }}
+      /><br />
+      <button onClick={uploadFile}> Upload Image</button><br />
+
             <button type="button" className="btn btn-secondary btn-block">
               ADD PRODUCT
             </button><br/>
@@ -89,6 +122,7 @@ export default function ProductForm() {
           
         </div>
       </div>
+    </div>
     </div>
   );
 }

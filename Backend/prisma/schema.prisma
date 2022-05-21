@@ -27,6 +27,7 @@ model Product {
   name      String
   price     Float
   catagory  String
+  url       String?
   Cartitem  Cartitem[]
   Orderitem Orderitem[]
 }
