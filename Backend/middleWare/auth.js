@@ -10,8 +10,8 @@ const auth = async (req, res, next) => {
     }
     
     const token = req.header("Authorization").split(" ")[1];
-    console.log(token);
     var authVerify = jwt.verify(token, process.env.SECRET_KEY);
+  
     
     const user = await prisma.user.findFirst({
       where: { id: authVerify.unique },

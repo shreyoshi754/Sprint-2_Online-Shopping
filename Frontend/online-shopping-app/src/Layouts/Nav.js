@@ -84,7 +84,9 @@ function Nav(props) {
   }
   const handleAddProduct=(event)=>{
     event.preventDefault();
+    setAnchorElUser(null);
     navigate("/addproduct");
+    
   }
 
   const handleOpenNavMenu = (event) => {
@@ -111,7 +113,7 @@ function Nav(props) {
           variant="h6"
           noWrap
           component="a"
-          href="/"
+          onClick={()=>navigate("/")}
           sx={{
             mr: 2,
             display: { xs: 'none', md: 'flex' },
@@ -262,14 +264,12 @@ function Nav(props) {
           </Menu>
         </Box>:
         <Box sx={{ flexGrow: 0 }}>
-          <Tooltip title="Open settings">
           <Button
               onClick={()=>navigate("/login")}
-              sx={{ my: 2, color: 'white', display: 'block' }}
+              sx={{ color: 'white', display: 'block' }}
             >
             Login
             </Button>
-          </Tooltip>
           </Box> }
       </Toolbar>
     </Container>

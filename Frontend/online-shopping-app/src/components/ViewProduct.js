@@ -76,7 +76,6 @@ function ViewProduct(props) {
             <p className="card__description">Catagory: {props.description}</p>
             <h3 className="card__price">Price: {props.price}</h3>
             <button className="card__btn" onClick={() => handleSubmit(props.id)}>Add to Cart</button>
-            <ToastContainer/>
         </div>
 
     );
