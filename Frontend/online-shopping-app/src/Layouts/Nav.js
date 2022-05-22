@@ -256,7 +256,7 @@ function Nav(props) {
               {role==='seller' ?
                 <MenuItem  onClick={handleAddProduct}>
                 <Typography textAlign="center">Add Product</Typography>
-              </MenuItem>:<></>}
+              </MenuItem>:<MenuItem></MenuItem>}
               <MenuItem  onClick={handleLogout}>
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>

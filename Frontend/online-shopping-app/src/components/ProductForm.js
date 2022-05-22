@@ -12,6 +12,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../Firebase/firebase";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { Navigate } from "react-router-dom";
 
 export default function ProductForm() {
   // States for registration
@@ -19,6 +20,7 @@ export default function ProductForm() {
   const temp = useSelector((state) => state);
   console.log(temp.token);
   const token = temp.token;
+  const role=temp.user.role;
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0.0);
   const [catagory, setCatagory] = useState("");
@@ -113,6 +115,7 @@ export default function ProductForm() {
     }
   };
   console.log(imageUrls);
+  if(role==='seller'){
   return (
     <div style={{ marginTop: "12%" }}>
       <div className="img-component">
@@ -192,4 +195,17 @@ export default function ProductForm() {
       </div>
     </div>
   );
+              }
+  else{
+    toast.error("you are not a seller",{
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+      return <Navigate to='/'/>
+  }
 }
