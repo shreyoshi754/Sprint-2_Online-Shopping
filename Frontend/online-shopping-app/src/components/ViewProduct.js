@@ -3,12 +3,27 @@ import "./Form.css";
 import { useSelector } from "react-redux";
 import axios from 'axios';
 import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 
 function ViewProduct(props) {
+    const navigate = useNavigate();
     const temp = useSelector((state) => state);
     const obj = {};
     const handleSubmit = async (id) => {
+        if(!temp.auth){
+            toast.success('Please Login in Order to add items',{
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+                navigate("/login")
+
+        }else{
         console.log(id);
         const headers = {
             "Content-Type": "application/json",
@@ -49,6 +64,7 @@ function ViewProduct(props) {
         } catch (error) {
 
         }
+    }
     }
     console.log(props);
     return (

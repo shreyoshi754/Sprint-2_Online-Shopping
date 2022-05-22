@@ -4,6 +4,7 @@ import Register from './Components/Register'
 import Nav from "./Layouts/Nav";
 import ProductForm from "./Components/ProductForm";
 import ViewCart from "./Components/ViewCart";
+import ProtectedRoute from "./ProtectedRoute";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route,Routes,Link } from "react-router-dom";
@@ -17,12 +18,14 @@ function App() {
               </nav>
             <Routes>
 
-            <Route exact path="/" element={<Home/>} />
-            <Route exact path="/register" element={<Register/>} />
-            <Route exact path="/login" element={<Login/>} />
-            <Route exact path="/addproduct" element={<ProductForm/>} />
-            <Route exact path="/viewproduct" element={<ViewProduct/>} />
-            <Route exact path="/viewcart" element={<ViewCart/>} />
+            <Route path="/" element={<Home/>} />
+            <Route path="/register" element={<Register/>} />
+            <Route path="/login" element={<Login/>} />
+            <Route element={<ProtectedRoute />} >
+            <Route path="/addproduct" element={<ProductForm/>} />
+            <Route path="/viewproduct" element={<ViewProduct/>} />
+            <Route path="/viewcart" element={<ViewCart/>} />
+            </Route>
               
               
             </Routes>

@@ -30,6 +30,7 @@ model Product {
   url       String?
   Cartitem  Cartitem[]
   Orderitem Orderitem[]
+  sellerId Int
 }
 
 // Every cart item can only be associated with a single product

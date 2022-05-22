@@ -2,7 +2,6 @@ const jwt = require("jsonwebtoken");
 const prisma = require("../Db/index");
 const auth = async (req, res, next) => {
   try {
-    console.log(req.header);
     if (!(req.header("Authorization"))) {
       return res.send({
         "isLoggedin":false,

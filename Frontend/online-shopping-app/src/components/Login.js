@@ -5,7 +5,7 @@ import { useState } from "react";
 import { FaEnvelope, FaUserCircle } from "react-icons/fa";
 import { FiLock } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation,Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { setLogin } from "../Actions/action";
@@ -16,6 +16,8 @@ export default function Form() {
 	const navigate = useNavigate();
   let dispatch = useDispatch();
   const temp = useSelector((state) => state);
+  const location=useLocation();
+  const from = location.state?.from?.pathname || '/';
   
   //States for registration
   const [name, setName] = useState("");
@@ -88,7 +90,7 @@ export default function Form() {
 				  });
 
 				  dispatch(setLogin(`Bearer ${token}`,user));
-				  navigate("/")
+				  navigate(from,{replace:true})
 
 			}
 

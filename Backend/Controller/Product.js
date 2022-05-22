@@ -2,13 +2,13 @@ const prisma = require('../Db/index')
 exports.addProduct = async (req, res, next) => {
   let { name, price, catagory, url } = req.body;
   price = parseFloat(price);
-  console.log(req.user);
+  sellerId = req.user.id
 
   
   try {
     if (req.user.role === 'seller') {
       const product = await prisma.product.create({
-        data: { name, price, catagory,url }
+        data: { name, price, catagory,url,sellerId }
       });
       console.log("Product added Sucessfully");
       return res.send({"product":product,"isAdded":true,"status":"Product Added Successfully"});
@@ -43,6 +43,24 @@ exports.viewProduct = async (req, res, next) => {
   }
 };
 
+exports.viewProductList=async (req, res, next)=>{
+  sellerId = req.user.id
+  
+  try {
+
+    const allProducts = await prisma.product.findMany({
+			where: {
+				sellerId,
+			},
+		}
+    );
+
+    return res.send(allProducts);
+    
+  } catch (error) {
+    
+  }
+}
 
 exports.deleteProduct = async (req, res, next) => {
   try {
