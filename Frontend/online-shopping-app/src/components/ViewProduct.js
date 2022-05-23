@@ -71,7 +71,7 @@ function ViewProduct(props) {
 
         <div className="card">
             <img src={props.url} className="card__img"></img>
-            <h2 className="card__title">Product Name:{props.title}</h2>
+            <h2 className="card__title">{props.title}</h2>
             <p>{props.id}</p>
             <p className="card__description">Catagory: {props.description}</p>
             <h3 className="card__price">Price: {props.price}</h3>
