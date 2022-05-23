@@ -46,7 +46,7 @@ body{
   .card{
     border: 2px solid royalblue;
     border-radius: 50px 20px;
-    box-shadow: 10px 10px rgba(150,170,180,0.5);
+    box-shadow: 10px 10px rgba(165, 204, 224, 0.5);
 
     margin: 2rem;
     padding: 1rem;
@@ -109,11 +109,25 @@ body{
     font-size: 18px;
     font-weight: 400;
   }
+   .order-item{
+    width: 850px;
+    margin: 80px auto;
+    background: #FFFFFF;
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+    border-radius: 6px;
    
+    display: flex;
+    flex-direction: column;
+
+   }
   .item {
     padding: 20px 30px;
     height: 120px;
     display: flex;
+  }
+  .items{
+    display: flex;
+
   }
    
   .item:nth-child(3) {
@@ -231,6 +245,7 @@ body{
     background: #FFFFFF;
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
     border-radius: 6px;
+    border: 1px solid black;
    
   }
 
@@ -406,4 +421,12 @@ footer .links a {
 }
 .about-name > h3{
   text-align: center;
+}
+.order-cart{
+  width: 650px;
+  margin: 80px auto;
+  background: #FFFFFF;
+  box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+  border-radius: 6px;
+
 }

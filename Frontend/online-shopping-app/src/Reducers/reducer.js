@@ -2,13 +2,13 @@ import React from 'react';
 let intialState={
     'auth':false,
     'token':null,
-    'user':null
+    'user':null,
+    'orderid':0
 }
 
 const reducer=(state={...intialState},action)=> {
     console.log("in reducers")
-    console.log(state);
-    
+    console.log(action.id)
         switch(action.type){
             case 'SET_LOGIN':
                 return state={
@@ -24,6 +24,13 @@ const reducer=(state={...intialState},action)=> {
                         token:null,
                         user:null,
                     }
+
+                case 'SET_ORDERID':
+                    return state={
+                        ...state,
+                        orderid:action.payload
+                    }
+
                 default:
                     return state
         }

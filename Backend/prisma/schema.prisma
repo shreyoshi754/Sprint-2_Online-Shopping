@@ -62,6 +62,7 @@ model Orderitem {
   price     Float
   Order     Order  @relation(fields: [orderId], references: [id])
   orderId   Int
+  url String?
 }
 
 model Order {

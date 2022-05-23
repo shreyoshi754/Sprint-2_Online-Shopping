@@ -19,8 +19,8 @@ function Cart(props) {
     <div className="description">
       {props.catagory}
     </div>
-    <div className="total-price">Rs. {props.price}</div>
-    <div className="quantity" style={{marginLeft:'30px'}}>
+    <div className="description">Rs. {props.price}</div>
+    <div className="description" style={{marginLeft:'30px'}}>
     <button class="minus-btn" type="button" name="button" onClick={() => props.handleDelete(props.id)}>
           X
       </button>

@@ -13,6 +13,7 @@ import Home from "./Components/Home";
 import ViewProduct from "./Components/ViewProduct";
 import Profile from "./Components/Profile";
 import Aboutus from "./Components/Aboutus";
+import ViewOrderItem from "./Components/ViewOrderItem";
 function App() {
   return (
     <Router>
@@ -32,6 +33,7 @@ function App() {
             <Route path="/viewproduct" element={<ViewProduct/>} />
             <Route path="/profile" element={<Profile/>} />
             <Route path="/viewcart" element={<ViewCart/>} />
+            <Route path="/vieworderitem" element={<ViewOrderItem/>} />
             <Route path="/vieworder" element={<ViewOrder/>} />
             <Route path="/viewProductList" element={<ViewSellerProducts/>} />
             </Route>

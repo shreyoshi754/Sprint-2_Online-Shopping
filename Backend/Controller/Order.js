@@ -25,6 +25,7 @@ exports.addOrder = async (req, res, next) => {
                 data:{productId:cartitems[i].productId,
                     item:cartitems[i].item,
                     price:cartitems[i].price,
+                    url:cartitems[i].url ,
                     orderId:order.id}
             })
             console.log(orderItems);
@@ -85,13 +86,16 @@ exports.viewOrderDetails = async(req,res,next)=>{
         const orderItems =await prisma.orderitem.findMany({
             where: {
                 orderId:id
-            },   
+            },  
+            include:{
+                product:1
+            } 
         })
         console.log(id);
         if(orderItems.length==0){
             return res.send("Nothing Ordered");
         }
-        return res.send(orderItems);
+        return res.send({"orderItem":orderItems});
         
     } catch (error) {
         
