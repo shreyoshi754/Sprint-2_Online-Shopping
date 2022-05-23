@@ -127,7 +127,7 @@ function ViewCart(props) {
             )};
             <div style={{textAlign:'center'}}>Cart Total: {totalprice}</div><br/>
             <div style={{textAlign:'center'}}>
-            <button class="order-btn" type="button" name="button" style={{margin:'0,auto'}}>PLACE ORDER</button>
+            <button class="order-btn" type="button" name="button">PLACE ORDER</button>
             </div>
             </div>
                 </div>
