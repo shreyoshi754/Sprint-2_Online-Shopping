@@ -37,7 +37,7 @@ function ViewOrder(props) {
           <></>
         )}
         <h2 style={{ textAlign: "center" }}>
-          {" "}
+        
           Thank You For Placing Your Order !!
         </h2>
       </div>

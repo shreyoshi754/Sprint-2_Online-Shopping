@@ -162,7 +162,7 @@ function ViewCart(props) {
                 draggable: true,
                 progress: undefined,
               })
-            navigate('/');
+            navigate('/vieworder');
 
         } catch (error) {
 
