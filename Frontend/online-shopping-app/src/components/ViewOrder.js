@@ -6,6 +6,7 @@ import Order from './Order';
 function ViewOrder(props) {
     const temp = useSelector((state) => state);
     const [orderitem, setOrderItem] = useState([]);
+    const [present,setPresent]=useState(false);
     const fetchOrder = async (e) => {
         try {
             const response = await axios.get("http://localhost:8083/vieworder", {
@@ -14,6 +15,8 @@ function ViewOrder(props) {
                 },
             });
             console.log(response);
+            const {orderPresent} = response.data;
+            setPresent(orderPresent);
             const orderItems=response.data.Order;
             setOrderItem(orderItems);
 
@@ -32,13 +35,15 @@ function ViewOrder(props) {
             <div class="title">
     My Order
   </div>
- 
-            {orderitem.map((order) =>
+            
+            {present?
+            orderitem.map((order) =>
                 <Order key={order.id} 
                     id={order.id}
                     total={order.totalAmount}
                     />
-            )}
+            ):<></>}
+
             </div></div>
     );
 }

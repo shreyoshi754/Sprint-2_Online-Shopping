@@ -113,7 +113,7 @@ function Nav(props) {
           variant="h6"
           noWrap
           component="a"
-          onClick={()=>navigate("/")}
+          onClick={()=> navigate("/")}
           sx={{
             mr: 2,
             display: { xs: 'none', md: 'flex' },
@@ -157,13 +157,13 @@ function Nav(props) {
             }}
           >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">Products</Typography>
+                <Typography onClick={()=> navigate("/")} textAlign="center">Home</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
                 <Typography textAlign="center">Pricing</Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Typography textAlign="center">About us</Typography>
+                <Typography onClick={() => navigate("/aboutus")} textAlign="center">About us</Typography>
               </MenuItem>
           </Menu>
         </Box>
@@ -197,13 +197,13 @@ function Nav(props) {
             
           
             <Button
-              onClick={handleCloseNavMenu}
+              onClick={()=> navigate("/")}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
-            Pricing
+            Home
             </Button>
             <Button
-              onClick={handleCloseNavMenu}
+              onClick={() => navigate("/aboutus")}
               sx={{ my: 2, color: 'white', display: 'block' }}
             >
             About us
@@ -244,7 +244,7 @@ function Nav(props) {
             onClose={handleCloseUserMenu}
           >
             
-              <MenuItem  onClick={handleCloseUserMenu}>
+              <MenuItem  onClick={()=> navigate("/profile")}>
                 <Typography textAlign="center">Account</Typography>
               </MenuItem>
               <MenuItem  onClick={() => navigate("/viewcart")}>

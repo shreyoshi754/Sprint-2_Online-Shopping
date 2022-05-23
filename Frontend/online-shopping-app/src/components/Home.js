@@ -25,8 +25,7 @@ function Home(props) {
 
     return (
 
-        <div>
-            <h1>I am home</h1>
+        <div style={{marginTop:"45px"}}>
             <div className="containerCard">
             {allProductList.map((product) =>
                 <ViewProduct key={product.id} 
