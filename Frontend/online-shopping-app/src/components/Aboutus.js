@@ -22,10 +22,10 @@ function Aboutus(props) {
             </div>
             <div className='about-card'>
                     <div className='about-name'>
-                    <h3>Souptik </h3>
+                    <h3>Sauptik</h3>
                     </div>
                     <div className='about-name'>
-                    <h3>Shreeyoshi </h3>
+                    <h3>Shreyoshi </h3>
                     </div>
                     <div className='about-name'>
                     <h3>Srijoni </h3>
