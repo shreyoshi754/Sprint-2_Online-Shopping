@@ -192,6 +192,7 @@ exports.decrement=async(req,res,next)=>{
                     price,item
                   },
             })
+            console.log(cartItem);
 
             return res.send(cartItem)
 

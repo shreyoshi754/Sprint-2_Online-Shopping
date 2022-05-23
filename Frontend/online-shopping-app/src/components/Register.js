@@ -170,7 +170,7 @@ export default function Form() {
               REGISTER
             </button><br />
             <label style={{ color: '#088F8F' }}>Already have an Account</label>
-            <div><a href="#" onClick={() => navigate("/login")}>Register here</a></div>
+            <div><a href="#" onClick={() => navigate("/login")} style={{width:'100%'}}>Login here</a></div>
           </form>
 
         </div>
