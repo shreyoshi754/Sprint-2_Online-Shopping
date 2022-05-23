@@ -4,7 +4,7 @@ function Aboutus(props) {
 
     return (
         <div style={{marginTop:"10%"}}> 
-            <h2>Hi We are group 7 of the Batch-jr16</h2>
+            <h2>Hi We are group 7 of the Batch-jr9</h2>
             <div className='about-card'>
                 <div className='about'>
                     <img className='about-img' src='https://firebasestorage.googleapis.com/v0/b/shoppingapp-dev.appspot.com/o/images%2FWhatsApp%20Image%202022-05-23%20at%208.20.17%20PM.jpegMon%20May%2023%202022%2020%3A47%3A09%20GMT%2B0530%20(India%20Standard%20Time)?alt=media&token=0efbb6b1-be30-4c36-b489-20a9c6031500' />
