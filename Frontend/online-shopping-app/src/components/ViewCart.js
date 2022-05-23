@@ -20,8 +20,10 @@ function ViewCart(props) {
                 },
             });
             console.log(response);
-            console.log(response.data.cartItem);
-            setCartItem(response.data.cartItem);
+            const cartItems=response.data.cartItem;
+            cartItems.sort(function(a, b){return a.id-b.id});
+            console.log(cartItems)
+            setCartItem(cartItems);
             setTotalPrice(response.data.totalPrice);
         } catch (error) {
             console.log(error)
@@ -122,9 +124,10 @@ function ViewCart(props) {
                     item = {cart.item}
                     productId = {cart.productId}
                     id={cart.id}
+                    url={cart.url}
                     handleSubmit={handleSubmit}
                     handleMinus={handleMinus}/>
-            )};
+            )}
             <div style={{textAlign:'center'}}>Cart Total: {totalprice}</div><br/>
             <div style={{textAlign:'center'}}>
             <button class="order-btn" type="button" name="button" style={{margin:'0,auto'}}>PLACE ORDER</button>

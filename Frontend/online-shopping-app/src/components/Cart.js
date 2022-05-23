@@ -10,7 +10,7 @@ function Cart(props) {
     </div>
  
     <div class="image">
-      <img src="item-1.png" alt="" />
+      <img className='img-cart' src={props.url} alt="" />
     </div>
  
     <div className="description">
