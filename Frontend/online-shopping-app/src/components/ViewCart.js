@@ -9,6 +9,7 @@ function ViewCart(props) {
     const temp = useSelector((state) => state);
     const [cartitem, setCartItem] = useState([]);
     const [totalprice, setTotalPrice] = useState(0.0);
+    const [slNo,setSlNo]=useState('#');
     const obj = {};
     const navigate = useNavigate();
     const fatchProduct = async (e) => {
@@ -177,8 +178,13 @@ function ViewCart(props) {
                     handleSubmit={handleSubmit}
                     handleMinus={handleMinus}
                     handleDelete={handleDelete}
+                    sl={slNo}
                     />
-            )}
+
+                
+            )
+            
+            }
             <div style={{textAlign:'center'}}>Cart Total: {totalprice}</div><br/>
             <div style={{textAlign:'center'}}>
             <button class="order-btn" type="button" name="button" onClick={() => handleOrder(cartitem[0].cartId)}>PLACE ORDER</button>

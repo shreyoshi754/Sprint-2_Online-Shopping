@@ -1,14 +1,10 @@
-import React from 'react';
+import React,{ useState } from 'react';
 
 function Cart(props) {
+  
     return (
         <div className="">
   <div className="item">
-    <div className="buttons">
-      <span class="delete-btn"></span>
-      <span class="like-btn"></span>
-    </div>
- 
     <div class="image">
       <img className='img-cart' src={props.url} alt="" />
     </div>
