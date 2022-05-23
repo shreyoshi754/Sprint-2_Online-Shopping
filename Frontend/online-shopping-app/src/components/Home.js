@@ -25,7 +25,7 @@ function Home(props) {
 
     return (
 
-        <div style={{marginTop:"45px"}}>
+        <div style={{marginTop:"10%"}}>
             <div className="containerCard">
             {allProductList.map((product) =>
                 <ViewProduct key={product.id} 
