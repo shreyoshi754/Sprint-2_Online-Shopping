@@ -63,10 +63,12 @@ exports.viewOrder=async(req,res,next)=>{
         });
         if(Order.length==0){
             return res.send({
+                'orderPresent':false,
                 "Status":"No Order found"
             })
         }
         res.send({
+            'orderPresent':true,
             "userid":userId,
             "Order":Order
         })

@@ -5,7 +5,8 @@ import Nav from "./Layouts/Nav";
 import ProductForm from "./components/ProductForm";
 import ViewCart from "./components/ViewCart";
 import ProtectedRoute from "./ProtectedRoute";
-
+import ViewOrder from "./components/ViewOrder";
+import ViewSellerProducts from "./components/ViewSellerProducts";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route,Routes,Link } from "react-router-dom";
 import Home from "./components/Home";
@@ -25,6 +26,8 @@ function App() {
             <Route path="/addproduct" element={<ProductForm/>} />
             <Route path="/viewproduct" element={<ViewProduct/>} />
             <Route path="/viewcart" element={<ViewCart/>} />
+            <Route path="/vieworder" element={<ViewOrder/>} />
+            <Route path="/viewProductList" element={<ViewSellerProducts/>} />
             </Route>
               
               

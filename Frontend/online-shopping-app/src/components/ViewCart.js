@@ -108,6 +108,54 @@ function ViewCart(props) {
 
         } catch (error) {
 
+        }}
+        const handleDelete = async (id) => {
+            console.log(id);
+            const headers = {
+                "Content-Type": "application/json",
+                Authorization: temp.token,
+            }
+            try {
+                const response = await axios.delete(
+                    `http://localhost:8083/deleteitem/${id}`,
+                    {
+                        headers: headers,
+                    }
+                );
+                        toast.success('Item Deleted from Cart',{
+                          position: "top-right",
+                          autoClose: 5000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                        })
+                          fatchProduct();
+                        
+    
+            } catch (error) {
+    
+            }
+    }
+    const handleOrder = async (id) => {
+        console.log(id);
+        const headers = {
+            "Content-Type": "application/json",
+            Authorization: temp.token,
+        }
+        try {
+            const response = await axios.post(
+                `http://localhost:8083/addorder/${id}`,
+                { ...obj },
+                {
+                    headers: headers,
+                }
+            );
+            navigate('/');
+
+        } catch (error) {
+
         }
     }
     return (
@@ -125,12 +173,15 @@ function ViewCart(props) {
                     productId = {cart.productId}
                     id={cart.id}
                     url={cart.url}
+                    cartid={cart.cartId}
                     handleSubmit={handleSubmit}
-                    handleMinus={handleMinus}/>
+                    handleMinus={handleMinus}
+                    handleDelete={handleDelete}
+                    />
             )}
             <div style={{textAlign:'center'}}>Cart Total: {totalprice}</div><br/>
             <div style={{textAlign:'center'}}>
-            <button class="order-btn" type="button" name="button">PLACE ORDER</button>
+            <button class="order-btn" type="button" name="button" onClick={() => handleOrder(cartitem[0].cartId)}>PLACE ORDER</button>
             </div>
             </div>
                 </div>

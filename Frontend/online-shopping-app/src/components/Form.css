@@ -92,7 +92,7 @@ body{
   }
 
   .shopping-cart {
-    width: 750px;
+    width: 850px;
     margin: 80px auto;
     background: #FFFFFF;
     box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
@@ -222,4 +222,14 @@ body{
     font-size: 16px;
     color: #43484D;
     font-weight: 300;
+  }
+  .order {
+    display:flex;
+    justify-content: space-between;
+    width: 850px;
+    margin: 80px auto;
+    background: #FFFFFF;
+    box-shadow: 1px 2px 3px 0px rgba(0,0,0,0.10);
+    border-radius: 6px;
+   
   }

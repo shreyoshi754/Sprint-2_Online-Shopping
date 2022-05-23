@@ -250,13 +250,17 @@ function Nav(props) {
               <MenuItem  onClick={() => navigate("/viewcart")}>
                 <Typography onClick={() => navigate("/viewcart")}textAlign="center">Cart</Typography>
               </MenuItem>
-              <MenuItem  onClick={handleCloseUserMenu}>
+              <MenuItem  onClick={() => navigate("/vieworder")}>
                 <Typography textAlign="center">Order</Typography>
               </MenuItem>
               {role==='seller' ?
+              <div>
+              <MenuItem  onClick={()=> navigate("/viewProductList")}>
+                <Typography textAlign="center">My Products</Typography>
+              </MenuItem>
                 <MenuItem  onClick={handleAddProduct}>
                 <Typography textAlign="center">Add Product</Typography>
-              </MenuItem>:<MenuItem></MenuItem>}
+              </MenuItem></div>:<MenuItem></MenuItem>}
               <MenuItem  onClick={handleLogout}>
                 <Typography textAlign="center">Logout</Typography>
               </MenuItem>

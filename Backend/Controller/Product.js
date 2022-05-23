@@ -55,7 +55,7 @@ exports.viewProductList=async (req, res, next)=>{
 		}
     );
 
-    return res.send(allProducts);
+    return res.send({'allProducts':allProducts});
     
   } catch (error) {
     
