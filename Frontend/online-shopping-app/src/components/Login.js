@@ -59,15 +59,9 @@ export default function Form() {
       setSubmitted(true);
       setError(false);
 	  const credentials ={email,password}
-	  console.log(credentials)
 		try {
 			const response = await axios.post(`http://localhost:8083/login`,{...credentials});
-      console.log("hello");
-			console.log(response);
 			const {isLoggedin,status,token,user}=response.data;
-			console.log(isLoggedin);
-			console.log(status);
-			console.log(token);
 			if(!isLoggedin){
 				toast.dark(status, {
 					position: "top-right",
@@ -103,7 +97,7 @@ export default function Form() {
   };
 
   return (
-    <div className="container">
+    <div style={{marginTop:"4%"}} className="container">
       <div className="form-box">
         <div className="header-form">
           <h4 className="text-primary text-center">

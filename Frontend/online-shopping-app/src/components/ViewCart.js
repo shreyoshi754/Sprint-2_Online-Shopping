@@ -20,10 +20,8 @@ function ViewCart(props) {
                     Authorization: temp.token,
                 },
             });
-            console.log(response);
             const cartItems=response.data.cartItem;
             cartItems.sort(function(a, b){return a.id-b.id});
-            console.log(cartItems)
             setCartItem(cartItems);
             setTotalPrice(response.data.totalPrice);
         } catch (error) {
@@ -38,7 +36,7 @@ function ViewCart(props) {
 
 
     const handleSubmit = async (id,item) => {
-        console.log(id);
+        
         const headers = {
             "Content-Type": "application/json",
             Authorization: temp.token,
@@ -51,7 +49,6 @@ function ViewCart(props) {
                     headers: headers,
                 }
             );
-                console.log(response);
                 const {isAdded} = response.data;
                 if(isAdded){
                     toast.success('Product added to Cart',{
@@ -81,7 +78,6 @@ function ViewCart(props) {
         }
     }
     const handleMinus = async (id) => {
-        console.log(id);
         const headers = {
             "Content-Type": "application/json",
             Authorization: temp.token,
@@ -93,7 +89,6 @@ function ViewCart(props) {
                     headers: headers,
                 }
             );
-                console.log(response);
                 const {isAdded} = response.data;
                     toast.success('Product removed from Cart',{
                       position: "top-right",
@@ -111,7 +106,6 @@ function ViewCart(props) {
 
         }}
         const handleDelete = async (id) => {
-            console.log(id);
             const headers = {
                 "Content-Type": "application/json",
                 Authorization: temp.token,
@@ -140,7 +134,6 @@ function ViewCart(props) {
             }
     }
     const handleOrder = async (id) => {
-        console.log(id);
         const headers = {
             "Content-Type": "application/json",
             Authorization: temp.token,

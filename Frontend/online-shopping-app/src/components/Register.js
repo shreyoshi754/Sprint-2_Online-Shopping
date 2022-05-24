@@ -51,12 +51,9 @@ export default function Form() {
     } else {
       setSubmitted(true);
       setError(false);
-      console.log(name, email, password, role);
       const obj = {name, email, password, role};
       try {
         const response = await axios.post(`http://localhost:8083/signup`, { ...obj });
-        console.log("hello");
-        console.log(response);
         const {registered} = response.data;
         if(!registered){
           toast.error("User already exists",{

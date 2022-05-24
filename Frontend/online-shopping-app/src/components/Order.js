@@ -10,7 +10,6 @@ function Order(props) {
     dispatch(setOrderId(id));
     navigate("/vieworderitem");
   };
-  console.log(temp.orderid);
   return (
     <div
       >

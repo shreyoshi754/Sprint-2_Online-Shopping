@@ -9,7 +9,6 @@ function ViewOrderItem(props) {
   const [orderItem, setOrderItem] = useState([]);
 
   const fatchOrder = async (e) => {
-    console.log(id);
     try {
       const response = await axios.get(
         `http://localhost:8083/vieworderDetails/${id}`,
@@ -19,8 +18,6 @@ function ViewOrderItem(props) {
           },
         }
       );
-      console.log(response);
-      console.log(response.data.orderItem[0].product.name);
       setOrderItem(response.data.orderItem);
     } catch (error) {
       console.log(error);

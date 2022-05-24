@@ -18,7 +18,7 @@ export const setLogout= () =>{
 }
 
 export const setOrderId= (id) =>{
-    console.log(id)
+    
     return{
         type:'SET_ORDERID',
         payload:id,

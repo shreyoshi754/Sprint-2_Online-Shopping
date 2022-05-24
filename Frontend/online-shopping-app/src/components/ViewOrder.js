@@ -14,7 +14,6 @@ function ViewOrder(props) {
           Authorization: temp.token,
         },
       });
-      console.log(response);
       const { orderPresent } = response.data;
       setPresent(orderPresent);
       const orderItems = response.data.Order;

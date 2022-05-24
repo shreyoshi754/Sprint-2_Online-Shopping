@@ -20,7 +20,7 @@ function Home(props) {
     useEffect(() => {
         fatchProduct()
     }, [])
-    console.log(allProductList)
+   
 
 
     return (

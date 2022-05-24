@@ -24,7 +24,6 @@ function ViewProduct(props) {
                 navigate("/login")
 
         }else{
-        console.log(id);
         const headers = {
             "Content-Type": "application/json",
             Authorization: temp.token,
@@ -37,7 +36,7 @@ function ViewProduct(props) {
                     headers: headers,
                 }
             );
-                console.log(response);
+               
                 const {isAdded} = response.data;
                 if(isAdded){
                     toast.success('Product added to Cart',{
@@ -66,13 +65,11 @@ function ViewProduct(props) {
         }
     }
     }
-    console.log(props);
     return (
 
         <div className="card">
             <img src={props.url} className="card__img"></img>
             <h2 className="card__title">{props.title}</h2>
-            <p>{props.id}</p>
             <p className="card__description">Catagory: {props.description}</p>
             <h3 className="card__price">Price: {props.price}</h3>
             <button className="card__btn" onClick={() => handleSubmit(props.id)}>Add to Cart</button>

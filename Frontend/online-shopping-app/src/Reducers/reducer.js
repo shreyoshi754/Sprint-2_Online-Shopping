@@ -7,8 +7,6 @@ let intialState={
 }
 
 const reducer=(state={...intialState},action)=> {
-    console.log("in reducers")
-    console.log(action.id)
         switch(action.type){
             case 'SET_LOGIN':
                 return state={

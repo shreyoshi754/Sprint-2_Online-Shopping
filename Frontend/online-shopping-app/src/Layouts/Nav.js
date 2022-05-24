@@ -18,6 +18,7 @@ import { setLogout } from "../Actions/action";
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import { toast, ToastContainer } from "react-toastify";
 
 
 //FaUserEdit
@@ -68,7 +69,6 @@ function Nav(props) {
     const navigate = useNavigate();
     let dispatch = useDispatch();
     const temp = useSelector((state) => state);
-    console.log(temp)
     if (typeof temp !== 'undefined' ){
        if(temp.user){
         t=temp.user.name
@@ -81,6 +81,16 @@ function Nav(props) {
   const handleLogout=(event)=>{
     event.preventDefault();
     dispatch(setLogout());
+    toast.dark('Logged Out Successfully', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+    navigate("/");
   }
   const handleAddProduct=(event)=>{
     event.preventDefault();

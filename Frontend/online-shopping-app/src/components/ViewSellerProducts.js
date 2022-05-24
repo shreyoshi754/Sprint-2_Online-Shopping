@@ -15,7 +15,6 @@ function ViewSellerProducts(props) {
                     Authorization: temp.token,
                 },
             });
-            console.log(response);
             const orderItems=response.data.allProducts;
             setSellerProds(orderItems);
 

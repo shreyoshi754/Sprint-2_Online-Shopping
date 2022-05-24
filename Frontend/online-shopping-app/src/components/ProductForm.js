@@ -18,7 +18,6 @@ export default function ProductForm() {
   // States for registration
   let navigate = useNavigate();
   const temp = useSelector((state) => state);
-  console.log(temp.token);
   const token = temp.token;
   const role=temp.user.role;
   const [name, setName] = useState("");
@@ -28,7 +27,6 @@ export default function ProductForm() {
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState(null);
   let newDate = new Date();
-  console.log(newDate);
   //image upload to firebase
   const imagesListRef = ref(storage, "images/");
   const uploadFile = (e) => {
@@ -61,15 +59,14 @@ export default function ProductForm() {
   };
 
   const obj = { name: name, price: price, catagory: catagory, url: imageUrls };
-  console.log(obj);
   const headers = {
     "Content-Type": "application/json",
     Authorization: token,
   };
-  console.log(headers);
+ 
   // Handling the form submission
   const handleSubmit = async (e) => {
-    console.log("heyyyyyyyyyyyyyyyyy");
+   
     e.preventDefault();
     if (name === "" || price === "" || catagory === "") {
       setError(true);
@@ -77,7 +74,6 @@ export default function ProductForm() {
       setSubmitted(true);
       setError(false);
       try {
-        console.log(token);
         const response = await axios.post(
           "http://localhost:8083/add",
           {...obj},
@@ -108,13 +104,12 @@ export default function ProductForm() {
             progress: undefined,
             });
         }
-        console.log(response);
       } catch (error) {
         console.log(error);
       }
     }
   };
-  console.log(imageUrls);
+ 
   if(role==='seller'){
   return (
     <div style={{ marginTop: "12%" }}>
